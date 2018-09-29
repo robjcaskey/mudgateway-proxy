@@ -1,0 +1,14 @@
+{
+    "name": "mudgateway-proxy",
+    "script": "mudgateway-proxy.js",
+    "env": {
+      "NODE_APP_INSTANCE":"wip",
+      "NODE_ENV":"testing",
+      "MUDGATEWAY_ACCESS_KEY_ID":"dummy",
+      "MUDGATEWAY_SECRET_ACCESS_KEY":"foo"
+
+    },
+    "watch": true,
+    "ignore_watch": [
+    ],
+}
