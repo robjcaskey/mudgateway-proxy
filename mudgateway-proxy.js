@@ -45,6 +45,9 @@ var MudGatewayPolicyHandler = function() {
 MudGatewayPolicyHandler.prototype.checkAllowed = function(options) {
   return apiCheck("/checkAllowed", options);
 }
+MudGatewayPolicyHandler.prototype.registerGateway = function(options) {
+  return apiCheck("/registerGateway", options);
+}
 MudGatewayPolicyHandler.prototype.attemptBan = function(options) {
   return apiCheck("/attemptBan", options);
 }
@@ -72,6 +75,9 @@ LocalPolicyHandler.prototype.checkAllowed = function(options) {
 LocalPolicyHandler.prototype.checkCharacterNameCanBan = function(name) {
   var key = options.host+":"+options.port;
   return Promise.resolve(this.AccessList.indexOf(key) !== -1);
+}
+LocalPolicyHandler.prototype.registerGateway = function() {
+  return Promise.resolve();
 }
 
 var PolicyHandler = MUDGATEWAY_ACCESS_KEY_ID ? MudGatewayPolicyHandler  : LocalPolicyHandler;
@@ -191,6 +197,8 @@ var server = http.createServer(function(request, response) {
 server.listen(8080, "0.0.0.0",  function() {
     policyHandler.log((new Date()) + ' Server is listening on port 8080');
 });
+
+policyHandler.registerGateway();
  
 wsServer = new WebSocketServer({
     httpServer: server,
