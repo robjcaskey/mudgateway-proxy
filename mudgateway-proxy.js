@@ -10,11 +10,12 @@ var naughtyList = [];
 
 var MUDGATEWAY_ACCESS_KEY_ID = process.env.MUDGATEWAY_ACCESS_KEY_ID;
 var MUDGATEWAY_SECRET_ACCESS_KEY = process.env.MUDGATEWAY_SECRET_ACCESS_KEY;
-
+var MUDGATEWAY_API_ROOT = process.env.MUDGATEWAY_API_ROOT;
 
 
 function apiCheck(url, params) {
-  var rootUrl = "https://api-dev.mudgateway.com";
+  var defaultApiRoot = 'https://api.mudgateway.com';
+  var rootUrl = MUDGATEWAY_API_ROOT ? MUD_GATEWAY_API_ROOT : defaultApiRoot;
   return new Promise((resolve, reject) => {
     var options = {
       uri:rootUrl+url,
