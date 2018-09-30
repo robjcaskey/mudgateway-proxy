@@ -49,6 +49,7 @@ MudGatewayPolicyHandler.prototype.attemptBan = function(options) {
   return apiCheck("/attemptBan", options);
 }
 MudGatewayPolicyHandler.prototype.log = function(...args) {
+console.log(...args)
   return;
 }
 
@@ -73,9 +74,9 @@ LocalPolicyHandler.prototype.checkCharacterNameCanBan = function(name) {
   return Promise.resolve(this.AccessList.indexOf(key) !== -1);
 }
 
-policyHandler.log("Access key was"+MUDGATEWAY_ACCESS_KEY_ID)
 var PolicyHandler = MUDGATEWAY_ACCESS_KEY_ID ? MudGatewayPolicyHandler  : LocalPolicyHandler;
 var policyHandler = new PolicyHandler();
+policyHandler.log("Access key was"+MUDGATEWAY_ACCESS_KEY_ID)
 
 var maxConnectionId = 0;
 function createConnectionId() {
