@@ -162,7 +162,7 @@ function TelnetConnection(request, realAddress, sendClient, host, port) {
           var messages = [
             "First-tell auto-reply: I'm connected via a proxy - my real "+socket.remoteFamily+" address is "+socket.remoteAddress+" and my real port is "+socket.remotePort+".",
             "If you tell me SCRAM my IP will instantly be banned from your game. PLEASE do not ban this player's IP address.",
-            "It is shared by other well-behaving players. Visit http://comingsoon.info for more info." 
+            "It is shared by other well-behaving players. Visit http://admin.mudgateway.com for more info." 
           ];
           messages.map(message => {
             tell(name, message)
@@ -297,6 +297,8 @@ wsServer.on('request', function(request) {
   });
   connection.on('close', function(reasonCode, description) {
     policyHandler.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
-    telnetConnection.destroy();
+    if(telnetConnection) {
+      telnetConnection.destroy();
+    }
   });
 });
