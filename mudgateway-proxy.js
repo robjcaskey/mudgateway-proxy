@@ -14,6 +14,8 @@ var MUDGATEWAY_API_ROOT = process.env.MUDGATEWAY_API_ROOT;
 
 
 function apiCheck(url, params) {
+  params.MUDGATEWAY_ACCESS_KEY_ID = MUDGATEWAY_ACCESS_KEY_ID;
+  params.MUDGATEWAY_SECRET_ACCESS_KEY = MUDGATEWAY_SECRET_ACCESS_KEY;
   var defaultApiRoot = 'https://api.mudgateway.com';
   var rootUrl = MUDGATEWAY_API_ROOT ? MUD_GATEWAY_API_ROOT : defaultApiRoot;
   return new Promise((resolve, reject) => {
